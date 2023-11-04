@@ -7,6 +7,8 @@
     let selectedTeam2 = teams[1];
 
     let selectedPlayer;
+    const testPlayers1 = [{name: "Stephen Curry", id: 201939}, {name: "Klay Thompson", id: 202691}, {name: "Draymond Green", id: 203110}, {name: "Andrew Wiggins", id: 203952}, {name: "James Wiseman", id: 1630164}];
+    const testPlayers2 = [{name: "Nikola Jokic", id: 203999}, {name: "Jamal Murray", id: 1627750}, {name: "Michael Porter Jr.", id: 1629008}, {name: "Will Barton", id: 203115}, {name: "Paul Millsap", id: 200794}];
 
     function handleBet({type, overUnder, value}) {
         console.log(type, overUnder, value);
@@ -20,7 +22,7 @@
             <option value={team}>{team}</option>
         {/each}
         </select>
-        <Roster team={selectedTeam1}/>
+        <Roster team={testPlayers1}/>
     </div>
     <div class="flex-1 border p-4 h-1/3">
         <Bet handleBet/>
@@ -31,6 +33,6 @@
             <option value={team}>{team}</option>
         {/each}
         </select>
-        <Roster team={selectedTeam2}/>
+        <Roster team={testPlayers2}/>
     </div>
 </main>
