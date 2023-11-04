@@ -1,6 +1,7 @@
 <script>
     import { flip } from "svelte/animate";
-    //export let team;
+    import {selectedPlayer} from '$lib/stores/SelectedPlayer.js';
+
     const team = [{name: "Stephen Curry", id: 201939}, {name: "Klay Thompson", id: 202691}, {name: "Draymond Green", id: 203110}, {name: "Andrew Wiggins", id: 203952}, {name: "James Wiseman", id: 1630164}];
     let positions = [
         {name: "Point Guard", players: []},
@@ -35,15 +36,18 @@
 <div>
     {#each positions as position, positionIndex (position)}
         <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <div class="w-36 h-36 bg-slate-200 border border-solid border-slate-300 rounded-lg block"
-        on:dragenter={() => hoveredPosition = position.name} on:dragleave={() => hoveredPosition = null} on:drop={e => drop(e, positionIndex)} animate:flip
+        <div class="w-32 h-32 bg-slate-200 border border-solid border-slate-300 rounded-lg block"
+        on:dragenter={() => hoveredPosition = position.name} on:dragleave={() => hoveredPosition = null} on:drop={e => drop(e, positionIndex)} animate:flip on:dragover={e => e.preventDefault()}
         class:border-teal-300={hoveredPosition === position.name}>
-            <p class="text-center text-slate-500 font-semibold text-lg">Test</p>
+            {#if positions[positionIndex].players.length === 0}
+                <p class="text-center text-slate-500 font-semibold text-lg">{position.name}</p>
+            {/if}
             {#each position.players as player, playerIndex (player)}
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <div class="max-w-xs shadow-lg w-36 h-36 rounded inline-block border-solid border-teal-200 border bg-slate-200"
-                on:dragstart={e => dragStart(e, positionIndex, playerIndex)} animate:flip draggable="true">
-                    <h1 class="font-bold text-lg mb-2 h-1/4 text-center">{player.name.split(" ")[1]}</h1>
+                <div class="max-w-xs shadow-lg w-32 h-32 rounded inline-block border-solid border-teal-200 border bg-slate-200"
+                on:dragstart={e => dragStart(e, positionIndex, playerIndex)} animate:flip draggable="true" on:dblclick={() => selectedPlayer.set(player.name)}
+                class:bg-purple-300={$selectedPlayer === player.name}>
+                    <h1 class="font-bold text-lg h-1/4 text-center">{player.name.split(" ")[1]}</h1>
                     <img class="w-full h-3/4" src={`https://cdn.nba.com/headshots/nba/latest/260x190/${player.id}.png`} alt="player headshot"/>
                 </div>
             {/each}
