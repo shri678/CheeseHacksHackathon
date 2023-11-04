@@ -1,4 +1,5 @@
 <script>
+    export let handleBet;
     const options = ["Points", "Steals", "Rebounds"];
     const overUnder = ["Over", "Under"];
     let selectedOption = options[0];
@@ -17,6 +18,7 @@
             overUnder: selectedOverUnder,
             value: inputValue
         };
+        handleBet(bet);
     }
 </script>
 
