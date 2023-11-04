@@ -30,3 +30,10 @@ nba_teams = {
     'UTA': 'Utah Jazz',
     'WAS': 'Washington Wizards'
 }
+
+#Receive player data provided the player ID
+def get_players_data(id):
+    career_player = playercareerstats.PlayerCareerStats(player_id=id) 
+    career_player.get_data_frames()[0]
+    career_player.get_json()
+    return career_player.get_dict()['resultSets'][0]['rowSet'][::-1][:2]
