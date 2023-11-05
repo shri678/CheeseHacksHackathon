@@ -1,11 +1,11 @@
 <script>
     import { flip } from "svelte/animate";
     import {selectedPlayer} from '$lib/stores/SelectedPlayer.js';
-  import { afterUpdate, onMount, tick } from "svelte";
+    import PlayerStatsPopout from "./PlayerStatsPopout.svelte";
+    import { onMount, tick } from "svelte";
 
     export let teamName;
     let team;
-    $: teamDataPromise = teamName && loadTeamData(teamName);
     $: positions = team ? [
         {name: "Point Guard", players: [team[0]]},
         {name: "Shooting Guard", players: [team[1]]},
@@ -33,15 +33,24 @@
         hoveredPosition = null;
     }
 
-    function loadTeamData(teamName) {
-        return fetch(`http://localhost:8000/teams/${teamName}`, {
+    let showStats = false;
+    let activePlayer = null;
+
+    function handlePlayerClick(player) {
+        activePlayer = player;
+        showStats = true;
+    }
+
+    onMount(async () => {
+        await tick();
+        fetch(`http://localhost:8000/teams/${teamName}`, {
             method: "GET",
         })
         .then((res) => res.json())
         .then((json) => {
             team = json;
         })
-    }
+    });
 </script>
 
 <div class="flex flex-col items-center justify-around h-100 gap-4 p-8">
@@ -59,11 +68,20 @@
                 <div class="max-w-xs shadow-lg w-full h-full rounded inline-block border-solid border-teal-200 border-4 bg-slate-200"
                 on:dragstart={e => dragStart(e, positionIndex, playerIndex)} animate:flip draggable="true" on:dblclick={() => selectedPlayer.set(player.name)}
                 class:border-red-500={$selectedPlayer === player.name}>
-                    <h1 class="font-bold text-md h-1/4 text-center">{player.name.split(" ")[1]}</h1>
-                    <img class="w-full h-3/4" src={`https://cdn.nba.com/headshots/nba/latest/260x190/${player.id}.png`}/>
+                    <h1 class="font-bold text-lg h-1/4 text-center">{player.name.split(" ")[1]}</h1>
+                    <img class="w-full h-3/4" src={`https://cdn.nba.com/headshots/nba/latest/260x190/${player.id}.png`} alt="player headshot"/>
+                    <div on:click={() => handlePlayerClick(player)} class="text-center mt-2 hover:bg-gray-100 transition cursor-pointer rounded p-2">
+                        <p><strong>Points:</strong> {player.points}</p>
+                        <p><strong>Blocks:</strong> {player.blocks}</p>
+                        <p><strong>Rebounds:</strong> {player.rebounds}</p>
+                    </div>
                 </div>
             {/each}
         </div>
     {/each}
+
+    {#if showStats && activePlayer}
+        <PlayerStatsPopout player={activePlayer} onClose={() => { showStats = false; activePlayer = null; }} />
+    {/if}
     {/if}
 </div>
