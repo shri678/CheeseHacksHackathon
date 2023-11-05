@@ -9,6 +9,6 @@
     </div>
     <div>
         <h1 class="font-semibold text-xl">Payoff Probability: </h1>
-        <h1 class="text-3xl font-semibold text-center">{betData.winProbability * 100 + "%"}</h1>
+        <h1 class="text-3xl font-semibold text-center">{Math.trunc(betData.winProbability * 10000) / 100 + "%"}</h1>
     </div>
 </div>

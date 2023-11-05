@@ -61,7 +61,6 @@ def return_data_team(team_name):
 
     return player_name_and_id
 
-#Prints index values for teams in current season data set
 
 info1 = teaminfocommon.TeamInfoCommon(team_id='1610612743')
 info2 = teamestimatedmetrics.TeamEstimatedMetrics(league_id='00',season='2023-24',season_type='Regular Season')

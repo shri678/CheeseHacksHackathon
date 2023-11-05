@@ -41,7 +41,7 @@
     const teamNames = Object.values(teams);
     let selectedTeam1 = teams[0];
     let selectedTeam2 = teams[1];
-    let opposingPlayer;
+    let opposingPlayer = null;
     let betData = {
         expectedValue: 0,
         winProbability: 0,
