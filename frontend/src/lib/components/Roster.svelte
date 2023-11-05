@@ -1,9 +1,11 @@
 <script>
     import { flip } from "svelte/animate";
     import {selectedPlayer} from '$lib/stores/SelectedPlayer.js';
+  import { onMount } from "svelte";
 
-    const team = [{name: "Stephen Curry", id: 201939}, {name: "Klay Thompson", id: 202691}, {name: "Draymond Green", id: 203110}, {name: "Andrew Wiggins", id: 203952}, {name: "James Wiseman", id: 1630164}];
-    let positions = [
+    export let teamName;
+    let team = [{name: "Loading...", id: 0}, {name: "Loading...", id: 0}, {name: "Loading...", id: 0}, {name: "Loading...", id: 0}, {name: "Loading...", id: 0}];
+    $: positions = [
         {name: "Point Guard", players: [team[0]]},
         {name: "Shooting Guard", players: [team[1]]},
         {name: "Small Forward", players: [team[2]]},
@@ -30,6 +32,19 @@
         hoveredPosition = null;
     }
 
+    onMount(async () => {
+        fetch("https://localhost:8000/teams", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({teamName}),
+        })
+        .then((res) => res.json())
+        .then((json) => {
+            team = json;
+        })
+    });
 </script>
 
 <div class="flex flex-col items-center justify-around h-100 gap-4 p-8">

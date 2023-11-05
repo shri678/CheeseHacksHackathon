@@ -45,9 +45,6 @@
         winProbability: 0,
     }
 
-    const testPlayers1 = [{name: "Stephen Curry", id: 201939}, {name: "Klay Thompson", id: 202691}, {name: "Draymond Green", id: 203110}, {name: "Andrew Wiggins", id: 203952}, {name: "James Wiseman", id: 1630164}];
-    const testPlayers2 = [{name: "Nikola Jokic", id: 203999}, {name: "Jamal Murray", id: 1627750}, {name: "Michael Porter Jr.", id: 1629008}, {name: "Will Barton", id: 203115}, {name: "Paul Millsap", id: 200794}];
-
     async function handleBet({type, overUnder, value}) {
         const data = {
             type,
@@ -56,7 +53,7 @@
             selectedPlayer: $selectedPlayer,
             opposingPlayer: $selectedPlayer,
         }
-        await fetch("http://localhost:2000/bet", {
+        await fetch("http://localhost:8000/bets", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -79,7 +76,7 @@
             <option value={team}>{team}</option>
         {/each}
         </select>
-        <Roster team={testPlayers1}/>
+        <Roster teamName={selectedTeam1}/>
     </div>
     <div class="flex-1 flex flex-col justify-center items-center gap-5 h-full">
         <img src="images/logo.jpeg" alt="logo" class="w-36 h-36 rounded-full"/> 
@@ -96,6 +93,6 @@
             <option value={team}>{team}</option>
         {/each}
         </select>
-        <Roster team={testPlayers2}/>
+        <Roster teamName={selectedTeam2}/>
     </div>
 </main>
