@@ -1,4 +1,4 @@
-# NBAOracle
+# NBOracle
 
 This is a submission for the CheeseHacks hackathon. 
 
