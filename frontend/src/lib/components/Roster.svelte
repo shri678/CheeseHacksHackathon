@@ -49,6 +49,7 @@
         .then((res) => res.json())
         .then((json) => {
             team = json;
+            console.log(team);
         })
     });
 </script>
