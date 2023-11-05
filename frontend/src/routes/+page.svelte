@@ -82,11 +82,11 @@
     </div>
     <div class="flex-1 flex flex-col justify-center items-center gap-5 h-full">
         <img src="images/logo.jpeg" alt="logo" class="w-36 h-36 rounded-full"/> 
-        <div class="bg-white p-4 h-1/4 w-full rounded-lg">
-        <Bet handleBet={handleBet}/>
+        <div class="bg-white p-4 h-1/6 w-full rounded-lg">
+        <GameResult teamNames={[selectedTeam1, selectedTeam2]}/>
         </div>
         <div class="bg-white p-4 h-1/4 w-full rounded-lg">
-        <GameResult teamNames={[selectedTeam1, selectedTeam2]}/>
+        <Bet handleBet={handleBet}/>
         </div>
         <div class="bg-white p-4 h-1/4 w-full rounded-lg">
         <BetInfo betData={betData}/>
