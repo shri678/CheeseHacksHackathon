@@ -22,4 +22,4 @@
 </script>
 
 <h1 class="text-2xl font-bold text-center">Expected Results</h1>
-<h2 class="text-2xl font-semibold text-center p-16">{result || "Loading..."}</h2>
+<h2 class="text-xl font-semibold text-center p-8 whitespace-pre-wrap">{result || "Loading..."}</h2>

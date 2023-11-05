@@ -3,7 +3,6 @@
     import Bet from '$lib/components/Bet.svelte'
     import BetInfo from '$lib/components/BetInfo.svelte'
     import {selectedPlayer} from '$lib/stores/SelectedPlayer.js'
-  import PlayerStatsPopout from '../lib/components/PlayerStatsPopout.svelte';
   import GameResult from '../lib/components/GameResult.svelte';
 
     const teams = {
