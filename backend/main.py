@@ -19,4 +19,5 @@ async def get_team(team_name: str):
 #Returns the estimated win probability for a given bet
 @app.post("/bets/")
 async def calculate_bet(bet_data: dict):
-    return calculate_win_probability(bet_data)
+    expected_value, win_probability = calculate_win_probability(bet_data)
+    return {"expectedValue": expected_value, "winProbability": win_probability}
