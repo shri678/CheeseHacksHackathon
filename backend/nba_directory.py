@@ -1,4 +1,5 @@
-from nba_api.stats.endpoints import playercareerstats
+from nba_api.stats.endpoints import playercareerstats, commonteamroster
+
 from nba_api.stats.static import players, teams
 import pandas as pd
 
