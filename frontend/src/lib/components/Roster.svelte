@@ -1,17 +1,17 @@
 <script>
     import { flip } from "svelte/animate";
     import {selectedPlayer} from '$lib/stores/SelectedPlayer.js';
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
     export let teamName;
-    let team = [{name: "Loading...", id: 0}, {name: "Loading...", id: 0}, {name: "Loading...", id: 0}, {name: "Loading...", id: 0}, {name: "Loading...", id: 0}];
-    $: positions = [
+    let team;
+    $: positions = team ? [
         {name: "Point Guard", players: [team[0]]},
         {name: "Shooting Guard", players: [team[1]]},
         {name: "Small Forward", players: [team[2]]},
         {name: "Power Forward", players: [team[3]]},
         {name: "Center", players: [team[4]]},
-    ]
+    ] : [];
     let hoveredPosition;
 
     function dragStart(event, positionIndex, playerIndex) {
@@ -33,7 +33,10 @@
     }
 
     onMount(async () => {
-        fetch(`https://localhost:8000/teams/${teamName}`)
+        await tick();
+        fetch(`http://localhost:8000/teams/${teamName}`, {
+            method: "GET",
+        })
         .then((res) => res.json())
         .then((json) => {
             team = json;
@@ -42,6 +45,7 @@
 </script>
 
 <div class="flex flex-col items-center justify-around h-100 gap-4 p-8">
+    {#if team}
     {#each positions as position, positionIndex (position)}
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <div class="w-40 h-40 bg-slate-200 border border-solid border-slate-300 "
@@ -61,4 +65,5 @@
             {/each}
         </div>
     {/each}
+    {/if}
 </div>
