@@ -22,18 +22,20 @@
     }
 </script>
 
-<div class="">
-    <h1>Select a Bet</h1>
-    <select bind:value={selectedOption}>
+<div class="flex flex-col items-center justify-between h-full">
+    <h1 class="font-semibold text-xl">Select An Outcome</h1>
+    <div class="flex items-center">
+    <select bind:value={selectedOption} class="appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:ring focus:ring-opacity-50">
         {#each options as option}
             <option value={option}>{option}</option>
         {/each}
     </select>
-    <select bind:value={selectedOverUnder}>
+    <select bind:value={selectedOverUnder} class="appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:ring focus:ring-opacity-50">
         {#each overUnder as option}
             <option value={option}>{option}</option>
         {/each}
     </select>
-    <input type="number" bind:value={inputValue} on:input={cleanInput} />
-    <button on:click={handleSubmit}>Submit</button>
+    <input type="number" bind:value={inputValue} on:input={cleanInput} class="w-full px-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring focus:ring-opacity-50 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"/>
+    </div>
+    <button on:click={handleSubmit} class="rounded-md bg-emerald-200 w-3/4 h-1/6">Submit</button>
 </div>

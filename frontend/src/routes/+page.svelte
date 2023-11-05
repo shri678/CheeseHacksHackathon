@@ -1,6 +1,7 @@
 <script>
     import Roster from '$lib/components/Roster.svelte'
     import Bet from '$lib/components/Bet.svelte'
+    import BetInfo from '$lib/components/BetInfo.svelte'
     import {selectedPlayer} from '$lib/stores/SelectedPlayer.js'
 
     const teams = {
@@ -39,7 +40,10 @@
     let selectedTeam1 = teams[0];
     let selectedTeam2 = teams[1];
     let opposingPlayer;
-    let betData;
+    let betData = {
+        expectedValue: 0,
+        winProbability: 0,
+    }
 
     const testPlayers1 = [{name: "Stephen Curry", id: 201939}, {name: "Klay Thompson", id: 202691}, {name: "Draymond Green", id: 203110}, {name: "Andrew Wiggins", id: 203952}, {name: "James Wiseman", id: 1630164}];
     const testPlayers2 = [{name: "Nikola Jokic", id: 203999}, {name: "Jamal Murray", id: 1627750}, {name: "Michael Porter Jr.", id: 1629008}, {name: "Will Barton", id: 203115}, {name: "Paul Millsap", id: 200794}];
@@ -68,20 +72,26 @@
     }
 </script>
 
-<main class="flex justify-between h-screen items-center">
-    <div class="flex-1 border p-4 h-full">
-        <select bind:value={selectedTeam1} class="w-full bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 px-4 py-2">
+<main class="flex justify-between h-screen items-center bg-slate-700">
+    <div class="flex-1 p-4 h-full">
+        <select bind:value={selectedTeam1} class="w-full bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 px-4 py-2 text-center">
         {#each teamNames as team}
             <option value={team}>{team}</option>
         {/each}
         </select>
         <Roster team={testPlayers1}/>
     </div>
-    <div class="flex-1 border p-4 h-1/3">
+    <div class="flex-1 flex flex-col justify-center items-center gap-5 h-full">
+        <img src="images/logo.jpeg" alt="logo" class="w-36 h-36 rounded-full"/> 
+        <div class="bg-white p-4 h-1/3 w-full rounded-lg">
         <Bet handleBet={handleBet}/>
+        </div>
+        <div class="bg-white p-4 h-1/3 w-full rounded-lg">
+        <BetInfo betData={betData}/>
+        </div>
     </div>
-    <div class="flex-1 border p-4 h-full">
-        <select bind:value={selectedTeam2} class="w-full bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 px-4 py-2">
+    <div class="flex-1 p-4 h-full">
+        <select bind:value={selectedTeam2} class="w-full bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 px-4 py-2 text-center">
         {#each teamNames as team}
             <option value={team}>{team}</option>
         {/each}
