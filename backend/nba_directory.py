@@ -1,4 +1,4 @@
-from nba_api.stats.endpoints import playercareerstats, commonteamroster
+from nba_api.stats.endpoints import playercareerstats, commonteamroster, teaminfocommon, teamestimatedmetrics
 
 from nba_api.stats.static import players, teams
 import pandas as pd
@@ -61,4 +61,13 @@ def return_data_team(team_name):
 
     return player_name_and_id
 
+#Prints index values for teams in current season data set
+
+info1 = teaminfocommon.TeamInfoCommon(team_id='1610612743')
+info2 = teamestimatedmetrics.TeamEstimatedMetrics(league_id='00',season='2023-24',season_type='Regular Season')
+avg = info1.team_season_ranks.get_dict()
+pace = info2.team_estimated_metrics.get_dict()
+
+for i in range(0,30):
+    print(i, "is index for", pace['data'][i][0], pace['data'][i][7], pace['data'][i][8])
 
