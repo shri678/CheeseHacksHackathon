@@ -37,9 +37,9 @@ def get_outcome(team1, team2):
             else:
                 result = name2 + " beat " + name1
         elif netDifferenceOff > 0 and netDifferenceDef < 0:
-            result = name1 + " beats " + name2
+            result = name1 + " beat " + name2
         else:
-            result = name2 + " beats " + name1
+            result = name2 + " beat " + name1
 
         if abs(netDifferenceOff) + abs(netDifferenceDef) >= 5:
             out += result + "\nThe " + name1 + " will definitely win"

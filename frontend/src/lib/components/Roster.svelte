@@ -62,7 +62,7 @@
                 on:dragstart={e => dragStart(e, positionIndex, playerIndex)} animate:flip draggable="true" on:dblclick={() => selectedPlayer.set(player.name)}
                 class:border-red-500={$selectedPlayer === player.name}>
                     <h1 class="font-bold text-lg h-1/4 text-center">{player.name.split(" ")[1]}</h1>
-                    <img class="w-full h-3/4" src={`https://cdn.nba.com/headshots/nba/latest/260x190/${player.id}.png`}/>
+                    <img class="w-full h-3/4 rounded-full" src={`https://cdn.nba.com/headshots/nba/latest/260x190/${player.id}.png`}/>
                 </div>
             {/each}
         </div>
