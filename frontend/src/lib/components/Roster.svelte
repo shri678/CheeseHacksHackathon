@@ -33,13 +33,7 @@
     }
 
     onMount(async () => {
-        fetch("https://localhost:8000/teams", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({teamName}),
-        })
+        fetch(`https://localhost:8000/teams/${teamName}`)
         .then((res) => res.json())
         .then((json) => {
             team = json;
