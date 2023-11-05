@@ -67,6 +67,12 @@ info2 = teamestimatedmetrics.TeamEstimatedMetrics(league_id='00',season='2023-24
 avg = info1.team_season_ranks.get_dict()
 pace = info2.team_estimated_metrics.get_dict()
 
+def get_team_id(team_name):
+    for i in range(len(pace['data'])):
+        if pace['data'][i][0] == team_name:
+            return i
+
+
 for i in range(0,30):
     print(i, "is index for", pace['data'][i][0], pace['data'][i][7], pace['data'][i][8])
 
