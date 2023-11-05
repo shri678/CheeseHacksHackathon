@@ -40,19 +40,21 @@
     const teamNames = Object.values(teams);
     let selectedTeam1 = teams[0];
     let selectedTeam2 = teams[1];
-    let opposingPlayer = null;
     let betData = {
         expectedValue: 0,
         winProbability: 0,
     }
 
     async function handleBet({type, overUnder, value}) {
+        if(!selectedPlayer) {
+            alert("Please select a player");
+            return;
+        }
         const data = {
             type,
             overUnder,
             value,
             selectedPlayer: $selectedPlayer,
-            opposingPlayer: $selectedPlayer,
         }
         await fetch("http://localhost:8000/bets", {
             method: "POST",

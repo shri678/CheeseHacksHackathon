@@ -1,14 +1,27 @@
 import math
 from nba_directory import get_team_id
-from nba_api.stats.endpoints import teaminfocommon
-from nba_api.stats.endpoints import teamestimatedmetrics
+from nba_api.stats.endpoints import teaminfocommon, playerdashboardbygeneralsplits, teamestimatedmetrics
+from nba_api.stats.static import players
 
-def calculate_win_probability(bet_data: dict):
+def calculate_win_probability(bet_data):
     sign = bet_data["overUnder"] == "Over" and 1 or -1
     value = bet_data["value"]
+    playerID = players.find_players_by_full_name(bet_data["selectedPlayer"])[0]["id"]
+    playerGeneralInfo = playerdashboardbygeneralsplits.PlayerDashboardByGeneralSplits(season='2023-24',season_type_playoffs='Regular Season', player_id=playerID).overall_player_dashboard.get_dict() 
+    playerPTS = playerGeneralInfo['data'][0][26]
+    playerREB = playerGeneralInfo['data'][0][18]
+    playerSTL = playerGeneralInfo['data'][0][21]
+    playerGP = playerGeneralInfo['data'][0][2]
+    if bet_data["type"] == "Points":
+        expected_value = playerPTS
+    elif bet_data["type"] == "Rebounds":
+        expected_value = playerREB
+    else:
+        expected_value = playerSTL
+    expected_value = round(expected_value / playerGP)
+        
     
-    
-    expected_value = 20
+
     diff = int(bet_data["value"]) - expected_value
     probability = 1 / (1 + 1.5 ** (sign * diff))
     return expected_value, probability
@@ -42,9 +55,9 @@ def get_outcome(team1, team2):
             result = name2 + " beat " + name1
 
         if abs(netDifferenceOff) + abs(netDifferenceDef) >= 5:
-            out += result + "\nThe " + name1 + " will definitely win"
+            out += result + "\nDefinite Win"
         else:
-            out += result + "\nThe " + name1 + " will probably win"
+            out += result + "\nProbable Win"
 
     return out
     

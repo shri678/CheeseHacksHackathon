@@ -37,4 +37,5 @@
     </select>
     <input type="number" bind:value={inputValue} on:input={cleanInput} class="text-black w-full px-4 py-3 pr-8 shadow-sm focus:ring focus:ring-opacity-50 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"/>
     </div>
+    <button on:click={handleSubmit} class="w-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-blue-500">Bet</button>
 </div>

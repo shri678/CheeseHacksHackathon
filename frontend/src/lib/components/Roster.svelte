@@ -57,9 +57,8 @@
                 <p class="text-center text-slate-500 font-semibold text-lg">{position.name}</p>
             {/if}
             {#each position.players as player, playerIndex (player)}
-                <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <div class="max-w-xs shadow-lg w-full h-full inline-block border-solid border-4 bg-slate-200"
-                on:dragstart={e => dragStart(e, positionIndex, playerIndex)} animate:flip draggable="true" on:dblclick={() => selectedPlayer.set(player.name)}
+                <div class="max-w-xs shadow-lg w-full h-full inline-block border-solid border-4 hover:scale-110 hover:bg-blue-500 cursor-pointer active:bg-blue-700"
+                on:dragstart={e => dragStart(e, positionIndex, playerIndex)} animate:flip draggable="true" on:click={() => selectedPlayer.set(player.name)}
                 class:border-red-500={$selectedPlayer === player.name}>
                     <h1 class="font-bold text-lg h-1/4 text-center">{player.name.split(" ")[1]}</h1>
                     <img class="w-full h-3/4 rounded-full" src={`https://cdn.nba.com/headshots/nba/latest/260x190/${player.id}.png`}/>
