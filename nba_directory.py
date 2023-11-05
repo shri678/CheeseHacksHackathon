@@ -1,3 +1,7 @@
+from nba_api.stats.endpoints import playercareerstats
+from nba_api.stats.static import players
+
+
 nba_teams = {
     'ATL': 'Atlanta Hawks',
     'BOS': 'Boston Celtics',
