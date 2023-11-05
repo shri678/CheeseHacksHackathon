@@ -38,7 +38,6 @@
 <div class="popout">
     <div class="popout-arrow"></div>
     <span class="close-button" on:click={onClose}>X</span>
-    <h2>{player.name}</h2>
     <p>Points: {player.stats.points}</p> 
     <p>Steals: {player.stats.steals}</p>
     <p>Rebounds: {player.stats.rebounds}</p>

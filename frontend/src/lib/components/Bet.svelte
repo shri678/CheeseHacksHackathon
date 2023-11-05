@@ -23,7 +23,7 @@
 </script>
 
 <div class="flex flex-col items-center justify-between h-full">
-    <h1 class="font-semibold text-xl">Select An Outcome</h1>
+    <h1 class="font-semibold text-2xl">Select An Outcome</h1>
     <div class="flex items-center">
     <select bind:value={selectedOption} class="appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 focus:outline-none focus:bg-white focus:border-gray-500 focus:ring focus:ring-opacity-50">
         {#each options as option}
@@ -37,5 +37,5 @@
     </select>
     <input type="number" bind:value={inputValue} on:input={cleanInput} class="w-full px-4 py-3 pr-8 border border-gray-300 shadow-sm focus:ring focus:ring-opacity-50 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"/>
     </div>
-    <button on:click={handleSubmit} class="rounded-md bg-emerald-200 w-3/4 h-1/6">Submit</button>
+    <button on:click={handleSubmit} class="rounded-md bg-emerald-200 w-3/4 h-1/4">Calculate</button>
 </div>
